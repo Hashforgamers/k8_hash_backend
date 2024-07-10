@@ -1,0 +1,40 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hash-backend-ingress
+  namespace: hash-backend
+  annotations:
+    spec.ingressClassName: "nginx"  # Update this with your IngressClass name
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: sales.hash.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: sales-service
+            port:
+              number: 6001
+  - host: user.hash.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: user-service
+            port:
+              number: 6000
+  - host: vendor.hash.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: vendor-service
+            port:
+              number: 6002

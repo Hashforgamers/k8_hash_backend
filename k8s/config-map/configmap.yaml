@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: hash-backend
+data:
+  FLASK_ENV: development
+  MONGO_URI: mongodb://mongo-service:27017/hashdb
+  REDIS_URL: redis://redis-service:6379
+  MAIL_SERVER: mailhog-service
+  MAIL_PORT: "1025"
+  MAIL_USE_TLS: "False"
+  MAIL_DEFAULT_SENDER: jbhanu718@gmail.com
+  KAFKA_SERVER: kafka:9092
+  PORT: "5050"

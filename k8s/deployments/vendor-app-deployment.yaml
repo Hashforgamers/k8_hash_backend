@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vendor-app
+spec:
+  selector:
+    matchLabels:
+      app: vendor-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: vendor-app
+    spec:
+      containers:
+        - name: vendor-app
+          image: bhanujoshi241999/vendor-app:gcp-1.0.2
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5052
+          envFrom:
+            - configMapRef:
+                name: app-config
+            - secretRef:
+                name: app-secrets
